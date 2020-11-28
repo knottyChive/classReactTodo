@@ -8,8 +8,31 @@ class Root extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            list: [1, 2 , 4]
+            list: [],
+            currentItem: {
+                text: ''
+            }
         }
+        this.addTodo = this.addTodo.bind(this);
+        this.handleChange = this.handleChange.bind(this)
+    }
+
+    // add function takes one arg, the todo, and adds it to the end of the list
+    addTodo() {
+        event.preventDefault();
+        const value = this.state.currentItem.text;
+        if (value.length > 0) {
+            this.setState({
+                list: [...this.state.list, value]
+            })
+        }
+    }
+    handleChange(e) {
+        this.setState({
+            currentItem: {
+                text: e.target.value
+            }
+        })
     }
 
     render() {
@@ -22,11 +45,15 @@ class Root extends React.Component {
                 </Navbar>
 
                 <Container>
-                    <Form>
-                        <Form.Group controlId="formBasicEmail">
+                    {this.state.list.map(elem => {
+                        return <p>{elem}</p>
+                    })}
+
+                    <Form onSubmit={this.addTodo}>
+                        <Form.Group controlId="formBasic">
                             <Form.Label>New Todo:</Form.Label>
-                            <Form.Control type="text" placeholder="Enter todo" />
-                            <Button variant="primary" type="submit">Submit</Button>
+                            <Form.Control type="text" value={this.state.currentItem.text} onChange={this.handleChange} />
+                            <Button variant="primary" type="submit" >Submit</Button>
                         </Form.Group>
                     </Form>
                 </Container>
