@@ -13,8 +13,10 @@ export default class List extends React.Component {
                 {this.props.list.map(todo => {
                     return (
                         <Card key={todo.key} className="my-3">
-                            <Card.Body>{todo.text}</Card.Body>
-                            <Button variant="danger" onClick={ () => props.deleteTodo(todo.key)}> Delete </Button>
+                            <Card.Body>
+                                <p>{todo.text}</p>
+                                <Button variant="danger" onClick={ () => this.props.deleteTodo(todo.key)}>Delete</Button>   
+                            </Card.Body>
                         </Card>
                     )
                 })}
