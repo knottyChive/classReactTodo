@@ -21,7 +21,9 @@ class Root extends React.Component {
             }
         }
         this.addTodo = this.addTodo.bind(this);
-        this.handleChange = this.handleChange.bind(this)
+        this.handleChange = this.handleChange.bind(this);
+        this.deleteTodo = this.deleteTodo.bind(this);
+        this.updateTodo = this.updateTodo.bind(this);
     }
     
     // add function takes one arg, the todo, and adds it to the end of the list
@@ -38,6 +40,13 @@ class Root extends React.Component {
             })
         }
     }
+
+    // edit todo. uses the todo key to grab the object, change the state.text, reset the state of the object with a new value
+    updateTodo(key) {
+        const item = this.state.list.filter(item => item.key == key);
+        console.log(item);
+    }
+
     handleChange(e) {
         this.setState({
             currentItem: {
@@ -47,12 +56,13 @@ class Root extends React.Component {
         })
     }
 
-    deleteTodo() {
-        const newList = this.state.list.filter( () => {
-
+    deleteTodo(key) {
+        const newList = this.state.list.filter(item => item.key != key);
+        this.setState({
+            list: newList
         })
     }
-
+ 
     render() {
         return (
            <>
@@ -67,7 +77,7 @@ class Root extends React.Component {
                         this is the space for the todos to be shown 
                         <List list={this.state.list} />
                     */}
-                    <List list={this.state.list} deleteTodo={this.deleteTodo} />
+                    <List list={this.state.list} deleteTodo={this.deleteTodo} updateTodo={this.updateTodo}/>
 
                     <Form onSubmit={this.addTodo} className="my-2">
                         <Form.Group controlId="formBasic">

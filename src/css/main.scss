@@ -1,5 +1,17 @@
-.wrapper {
-    background: blue;
+
+h1, h2, h3 {
+    font-family: 'Proza Libre', sans-serif;
+    font-size: 4rem;
+    color: white;
+}
+
+p, span {
+    font-family: "Source Sans Pro", sans-serif;
+
+}
+
+.card {
+    width: 60%;
     margin: auto;
-    
+    background-color: aqua;
 }
