@@ -10,15 +10,31 @@ export default class List extends React.Component {
     render() {
         return (
             <>
+                <h3 id="title">{this.props.title}</h3>
                 {this.props.list.map(todo => {
-                    return (
-                        <Card key={todo.key} className="my-3">
-                            <Card.Body>
-                                <p>{todo.text}</p>
-                                <Button variant="danger" onClick={ () => this.props.deleteTodo(todo.key)}>Delete</Button>   
-                            </Card.Body>
-                        </Card>
-                    )
+                    if (title === "Todo") {
+                        return (
+                            <Card key={todo.key} className="my-3">
+                                <Card.Body>
+                                    <p>{todo.text}</p>
+                                    <Button className="disabled" variant="outline-danger" onClick={ () => this.props.deleteTodo(todo.key, false)}>Delete</Button> 
+                                    <Button variant="success" onClick={ () => this.props.updateTodo(todo.key)}>Complete</Button>  
+                                </Card.Body>
+                            </Card>
+                        )
+                    } else {
+                        return (
+                            <Card key={todo.key} className="my-3">
+                                <Card.Body>
+                                    <p>{todo.text}</p>
+                                    <Button variant="danger" onClick={ () => this.props.deleteTodo(todo.key)}>Delete</Button> 
+                                    <Button  variant="success" onClick={ () => this.props.updateTodo(todo.key)}>Complete</Button>  
+                                </Card.Body>
+                            </Card>
+                        )
+                    }
+
+                    
                 })}
             </>
 
